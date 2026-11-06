@@ -3,8 +3,9 @@
    le theme clair de l'accueil /fr /en) : memes couleurs, rayons, ombres, boutons.
    Police : Inter auto-hebergee (SIL OFL 1.1, voir fonts/LICENSE-Inter-OFL.txt).
    Aucune ressource externe : la politique de confidentialite le promet.
-   Cache : les pages referencent style.css?v=… et site.js?v=… ; toute modification
-   de ce fichier ou de site.js doit changer ce ?v= dans les 6 pages. */
+   Cache : les pages referencent style.css?v=…, site.js?v=…, les icones et le logo
+   ClawShow avec ?v=… ; toute modification de l'un d'eux doit changer ce ?v= dans
+   les 6 pages. */
 
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 400; font-display: swap;
   src: url("fonts/inter-latin-400-normal.woff2") format("woff2");
@@ -75,15 +76,24 @@ img { max-width: 100%; }
   display: flex; align-items: center; justify-content: space-between;
   gap: 12px; min-height: 66px;
 }
-/* En-tete : marque sur une seule ligne, a toute largeur. nowrap + min-width:0 ;
-   sous 380 px c'est la taille du petit texte qui cede, jamais le retour a la ligne. */
-.site-header .brand { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap;
-  min-width: 0; text-decoration: none; color: var(--ink); line-height: 1.15; }
+/* Logo ClawShow — meme construction que clawshow.ai (esign-home.css l.26-34) :
+   PNG 128 px reduit par les attributs (44 en-tete, 40 pied) + mot « Claw<b>Show</b> »,
+   800, -.02em, « Show » en accent. Marge plutot que gap : Claw et Show sont deux
+   items flex, un gap couperait le mot. */
+.cs-logo { display: inline-flex; align-items: center; font-weight: 800; font-size: 20px;
+  letter-spacing: -.02em; color: var(--ink); text-decoration: none; white-space: nowrap; line-height: 1; }
+.cs-logo:hover { color: var(--ink); }
+.cs-logo b { color: var(--accent); font-weight: 800; }
+.cs-logo img { display: block; flex: none; margin-right: 9px; }
+
+/* En-tete : [logo] | signinpi, toujours sur une ligne. nowrap + min-width:0 ;
+   a l'etroit c'est la taille du logo qui cede, jamais le retour a la ligne. */
+.hbrand { display: flex; align-items: center; white-space: nowrap; min-width: 0; }
+.hsep { flex: none; width: 1px; height: 24px; background: var(--line); margin: 0 12px; }
+.site-header .brand { display: inline-flex; align-items: center; white-space: nowrap;
+  min-width: 0; text-decoration: none; color: var(--ink); line-height: 1; }
 .brand:hover { color: var(--ink); }
 .brand-name { font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
-.brand-by { font-size: 12.5px; font-weight: 600; color: var(--gray-2); letter-spacing: .01em; }
-/* Pied : la marque garde ses deux lignes (signinpi / par FUTUSHOW · ClawShow) */
-.foot-brand .brand-by { margin-top: 2px; color: var(--gray); font-size: 11.5px; }
 
 /* Selecteur de langue segmente (l.37-39) */
 .langsw {
@@ -227,11 +237,14 @@ details[open] summary { margin-bottom: 8px; }
 .site-footer { border-top: 1px solid var(--line); background: #fff; padding: 0 0 36px; font-size: 13.5px; color: var(--gray); }
 .site-footer .notice { border-top: 1px solid #c9ccfb; margin-bottom: 36px; }
 .foot { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
-.foot-brand { display: flex; flex-direction: column; line-height: 1.2; }
-.foot-brand .brand-name { color: var(--ink); font-size: 19px; }
-.site-footer nav { display: flex; flex-direction: column; }
-.site-footer nav a { display: block; padding: 4px 0; color: var(--gray); text-decoration: none; }
-.site-footer nav a:hover { color: var(--accent); }
+/* Colonne marque : logo, description, mention QTSP — max 290 px comme clawshow.ai */
+.foot-brand { max-width: 290px; }
+.foot-brand .cs-logo { font-size: 19px; margin-bottom: 10px; }
+.foot-brand p { margin: 0 0 8px; font-size: 13px; color: var(--gray); line-height: 1.55; }
+.site-footer h5 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: #3a3d52; }
+.site-footer nav, .foot-col { display: flex; flex-direction: column; }
+.site-footer nav a, .foot-col a { display: block; padding: 4px 0; color: var(--gray); text-decoration: none; }
+.site-footer nav a:hover, .foot-col a:hover { color: var(--accent); }
 .site-footer .legal-note {
   flex-basis: 100%; margin: 4px 0 0; padding-top: 20px; border-top: 1px solid var(--line);
   font-size: 12.5px; color: var(--gray-2); line-height: 1.6;
@@ -244,12 +257,16 @@ details[open] summary { margin-bottom: 8px; }
 }
 @media (max-width: 520px) {
   :root { --gutter: 16px; }
-  .brand-name { font-size: 18px; }
-  .site-header .brand-by { font-size: 11.5px; }
+  .site-header .brand-name { font-size: 17px; }
+  .site-header .cs-logo { font-size: 16px; }
+  .site-header .cs-logo img { width: 24px; height: 24px; margin-right: 6px; }
+  .hsep { height: 18px; margin: 0 9px; }
   .langsw > * { padding: 5px 9px; font-size: 12px; }
   .hero-tags li { font-size: 13px; padding: 5px 12px; }
 }
 @media (max-width: 380px) {
-  .site-header .brand { gap: 4px; }
-  .site-header .brand-by { font-size: 10.5px; }
+  .site-header .brand-name { font-size: 15px; }
+  .site-header .cs-logo { font-size: 14px; }
+  .site-header .cs-logo img { width: 20px; height: 20px; margin-right: 5px; }
+  .hsep { margin: 0 7px; }
 }
