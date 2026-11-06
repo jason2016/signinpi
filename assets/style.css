@@ -139,6 +139,26 @@ img { max-width: 100%; }
 .hero .lead { font-size: 17px; color: #c2c8de; max-width: 640px; margin: 0 auto; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 26px; }
 
+/* Adresse toujours visible sous les boutons, et panneau deplie par « Nous ecrire » */
+.hero-mail {
+  margin: 14px 0 0; font-size: 14px; color: #c2c8de; letter-spacing: .01em;
+  -webkit-user-select: all; user-select: all;
+}
+.contact-panel {
+  max-width: 480px; margin: 16px auto 0; padding: 20px 20px 16px;
+  background: #fff; color: var(--ink); border-radius: var(--r-card);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .25); text-align: center;
+}
+.contact-panel[hidden] { display: none; }
+.cp-mail {
+  margin: 0 0 12px; font-size: 22px; font-weight: 800; letter-spacing: -.01em; color: var(--navy);
+  -webkit-user-select: all; user-select: all;
+}
+.cp-copy { padding: 9px 20px; font-size: 14px; cursor: pointer; font-family: inherit; }
+.cp-status { margin: 8px 0 0; min-height: 0; font-size: 13.5px; font-weight: 700; color: var(--accent2); }
+.cp-status:empty { display: none; }
+.cp-hint { margin: 10px 0 0; font-size: 13.5px; color: var(--gray); }
+
 main { padding: 8px 0 56px; }
 h1 { font-size: 28px; line-height: 1.25; font-weight: 800; margin: 36px 0 12px; }
 h2 { font-size: 24px; line-height: 1.3; font-weight: 800; margin: 48px 0 14px; letter-spacing: -.01em; }
