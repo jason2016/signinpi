@@ -73,10 +73,15 @@ img { max-width: 100%; }
   display: flex; align-items: center; justify-content: space-between;
   gap: 12px; min-height: 66px;
 }
-.brand { display: inline-flex; flex-direction: column; text-decoration: none; color: var(--ink); line-height: 1.15; }
+/* En-tete : marque sur une seule ligne, a toute largeur. nowrap + min-width:0 ;
+   sous 380 px c'est la taille du petit texte qui cede, jamais le retour a la ligne. */
+.site-header .brand { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap;
+  min-width: 0; text-decoration: none; color: var(--ink); line-height: 1.15; }
 .brand:hover { color: var(--ink); }
 .brand-name { font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
-.brand-by { font-size: 11.5px; font-weight: 600; color: var(--gray); letter-spacing: .01em; margin-top: 2px; }
+.brand-by { font-size: 12.5px; font-weight: 600; color: var(--gray-2); letter-spacing: .01em; }
+/* Pied : la marque garde ses deux lignes (signinpi / par FUTUSHOW · ClawShow) */
+.foot-brand .brand-by { margin-top: 2px; color: var(--gray); font-size: 11.5px; }
 
 /* Selecteur de langue segmente (l.37-39) */
 .langsw {
@@ -113,12 +118,23 @@ img { max-width: 100%; }
   background: radial-gradient(600px 300px at 50% -10%, rgba(100, 102, 251, .35), transparent);
 }
 .hero .wrap { position: relative; z-index: 2; }
+/* Trois niveaux : H1 court, etiquettes, paragraphe. Le H1 doit tenir sur une ligne
+   a 1280 px et deux au plus a 390 px — d'ou aucune max-width, la largeur utile
+   est celle du conteneur. */
 .hero h1 {
-  font-size: 30px; line-height: 1.18; font-weight: 800; color: #fff;
-  margin: 0 auto 16px; max-width: 860px; text-wrap: balance;
+  font-size: clamp(28px, 4vw, 44px); line-height: 1.15; letter-spacing: -0.02em;
+  font-weight: 800; color: #fff; margin: 0 auto 18px; text-wrap: balance;
 }
-.hero h1:lang(fr) { letter-spacing: -.02em; }
-.hero .lead { font-size: 17px; color: #c2c8de; max-width: 680px; margin: 0 auto; }
+.hero-tags {
+  list-style: none; padding: 0; margin: 0 auto 22px;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+}
+.hero-tags li {
+  border-radius: 999px; padding: 6px 14px;
+  background: rgba(255, 255, 255, .10); border: 1px solid rgba(255, 255, 255, .18);
+  color: #e6e8f5; font-size: 14px; font-weight: 600; line-height: 1.3;
+}
+.hero .lead { font-size: 17px; color: #c2c8de; max-width: 640px; margin: 0 auto; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 26px; }
 
 main { padding: 8px 0 56px; }
@@ -201,14 +217,17 @@ details[open] summary { margin-bottom: 8px; }
 
 @media (min-width: 720px) {
   .hero { padding: 82px 0 96px; }
-  .hero h1 { font-size: 44px; }
-  .hero h1:lang(fr) { font-size: 40px; letter-spacing: -.03em; }
-  .hero .lead { font-size: 19px; }
   h2 { font-size: 30px; }
   .grid.two { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 520px) {
   :root { --gutter: 16px; }
   .brand-name { font-size: 18px; }
+  .site-header .brand-by { font-size: 11.5px; }
   .langsw > * { padding: 5px 9px; font-size: 12px; }
+  .hero-tags li { font-size: 13px; padding: 5px 12px; }
+}
+@media (max-width: 380px) {
+  .site-header .brand { gap: 4px; }
+  .site-header .brand-by { font-size: 10.5px; }
 }
