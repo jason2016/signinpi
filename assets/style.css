@@ -2,7 +2,9 @@
    Charte reprise de clawshow.ai (repos/clawshow-site/src/styles/esign-home.css,
    le theme clair de l'accueil /fr /en) : memes couleurs, rayons, ombres, boutons.
    Police : Inter auto-hebergee (SIL OFL 1.1, voir fonts/LICENSE-Inter-OFL.txt).
-   Aucune ressource externe : la politique de confidentialite le promet. */
+   Aucune ressource externe : la politique de confidentialite le promet.
+   Cache : les pages referencent style.css?v=… et site.js?v=… ; toute modification
+   de ce fichier ou de site.js doit changer ce ?v= dans les 6 pages. */
 
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 400; font-display: swap;
   src: url("fonts/inter-latin-400-normal.woff2") format("woff2");
@@ -123,7 +125,7 @@ img { max-width: 100%; }
    est celle du conteneur. */
 .hero h1 {
   font-size: clamp(28px, 4vw, 44px); line-height: 1.15; letter-spacing: -0.02em;
-  font-weight: 800; color: #fff; margin: 0 auto 18px; text-wrap: balance;
+  font-weight: 800; color: #fff; margin: 0 auto 24px; text-wrap: balance;
 }
 .hero-tags {
   list-style: none; padding: 0; margin: 0 auto 22px;
